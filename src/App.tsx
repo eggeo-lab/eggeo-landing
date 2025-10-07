@@ -52,28 +52,32 @@ const caseStudies = [
     title: "Gata Maula: la vermutería que se volvió comunidad",
     copy: "Narrativa ficcional y estilo propio que instalaron un ícono cultural en Córdoba. Eventos agotados y comunidad activa.",
     image: imgGata,
-    alt: "Interior de Gata Maula con barra de vermú y público"
+    alt: "Interior de Gata Maula con barra de vermú y público",
+    href: "https://www.instagram.com/gatamaula.ok/#"
   },
   {
     tag: "Food + Campañas",
     title: "Risata: pizza con identidad propia",
     copy: "Campañas virales (Semana de la Pizza), ediciones limitadas y contenido que fideliza y vende.",
     image: imgRisata,
-    alt: "Pizza de Risata recién salida del horno"
+    alt: "Pizza de Risata recién salida del horno",
+    href: "https://www.instagram.com/pizzarisata/#"
   },
   {
     tag: "Moda + Social",
     title: "Dakota & Warna: moda que conecta",
     copy: "Gestión estratégica, storytelling y campañas mayoristas con crecimiento acelerado en IG/TikTok.",
     image: imgDakota,
-    alt: "Producción de moda para Dakota & Warna"
+    alt: "Producción de moda para Dakota & Warna",
+    href: "https://www.instagram.com/dakota_cba/#"
   },
   {
     tag: "Apertura + Social",
     title: "Uila Café & Pan: un café con historia",
     copy: "Preapertura con activaciones en calle, expectativa en redes y relato honesto desde el día cero.",
     image: imgUila,
-    alt: "Fachada de Uila Café & Pan en su apertura"
+    alt: "Fachada de Uila Café & Pan en su apertura",
+    href: "https://www.instagram.com/uilacafe/#"
   }
 ];
 
@@ -472,7 +476,7 @@ function MobileCarousel({
       <div
         ref={ref}
         aria-label={ariaLabel}
-        className={`mt-10 flex gap-4 overflow-x-auto scroll-smooth no-scrollbar snap-x snap-mandatory snap-always scroll-px-4 justify-start [&>div]:snap-center [&>div]:basis-[88%] [&>div]:shrink-0 md:grid ${gridMd} ${gridLg} md:gap-6 md:overflow-visible md:snap-none md:[&>div]:basis-auto md:[&>div]:snap-none md:[&>div]:h-full`}
+        className={`mt-10 flex gap-4 overflow-x-auto overflow-y-hidden touch-pan-x overscroll-x-contain overscroll-y-none scroll-smooth no-scrollbar snap-x snap-mandatory snap-always scroll-px-4 justify-start [&>div]:snap-center [&>div]:basis-[88%] [&>div]:shrink-0 md:grid ${gridMd} ${gridLg} md:gap-6 md:overflow-visible md:snap-none md:[&>div]:basis-auto md:[&>div]:snap-none md:[&>div]:h-full`}
       >
         {children}
       </div>
@@ -530,11 +534,12 @@ function Marquee({ items }: {items: string[]}){
   );
 }
 
-function CaseCard({ tag, title, copy, image, alt }:{
-  tag: string; title: string; copy: string; image?: string; alt?: string
+function CaseCard({ tag, title, copy, image, alt, href }:{
+  tag: string; title: string; copy: string; image?: string; alt?: string; href?: string
 }){
+  const external = href?.startsWith("http");
   return (
-    <motion.article data-testid="case-card" {...fadeUp} className="group rounded-3xl border border-[var(--color-gray)] bg-white/[0.03] p-4 h-full min-h-[520px] md:min-h-[475px] flex flex-col">
+    <motion.article data-testid="case-card" {...fadeUp} className="group rounded-3xl border border-[var(--color-gray)] bg-white/[0.03] p-4 h-full min-h-[520px] md:min_h-[475px] flex flex-col">
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl ring-1 ring-white/15">
         {image ? (
           <img src={image} alt={alt || title} className="h-full w-full object-cover object-center" loading="lazy" />
@@ -549,7 +554,14 @@ function CaseCard({ tag, title, copy, image, alt }:{
       <h3 className="mt-2 font-display text-xl text-[var(--color-eggwhite)] group-hover:opacity-90">{title}</h3>
       <p className="mt-1 text-sm text-gray-300">{copy}</p>
       <div className="mt-auto pt-4 flex items-center justify-between">
-        <a href="#" className="text-sm text-gray-300 hover:text-[var(--color-eggwhite)]">Ver caso →</a>
+        <a
+          href={href || "#"}
+          className="text-sm text-gray-300 hover:text-[var(--color-eggwhite)]"
+          target={external ? "_blank" : undefined}
+          rel={external ? "noopener noreferrer" : undefined}
+        >
+          Ver caso →
+        </a>
         <span className="text-xs text-gray-500">2025</span>
       </div>
     </motion.article>
