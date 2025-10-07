@@ -174,7 +174,6 @@ async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
               <a href="#about" className="hover:text-[var(--color-yellow)]">Nosotros</a>
               <a href="#team" className="hover:text-[var(--color-yellow)]">Equipo</a>
               <a href="#testimonials" className="hover:text-[var(--color-yellow)]">Testimonios</a>
-              <a href="#manifesto" className="hover:text-[var(--color-yellow)]">Manifiesto</a>
               <a href="#contact" className="hover:text-[var(--color-yellow)]">Contacto</a>
             </nav>
             <a href="#contact" className="rounded-full bg-[var(--color-yellow)] text-[var(--color-black)] px-4 py-2 text-sm font-semibold hover:opacity-90">Hablemos</a>
@@ -385,7 +384,7 @@ function AnimatedTitle({ lines }: { lines: string[] }) {
       {lines.map((line, idx) => (
         <span key={idx} className="block">
           {line.split(" ").map((word, wi) => (
-            <span key={wi} className="inline-block mr-2">
+            <span key={wi} className="inline-block mr-2 md:mr-4 last:mr-0">
               {Array.from(word).map((ch, ci) => (
                 <motion.span
                   key={ci}
